@@ -765,8 +765,9 @@ contract Ownable {
 // File: ../examples/ropsten/contracts/RopstenConsumerBase.sol
 
 contract ARopstenConsumer is Chainlinked, Ownable {
-  uint256 constant private ORACLE_PAYMENT = 1 * LINK; // solium-disable-line zeppelin/no-arithmetic-operations
 
+  uint256 constant private ORACLE_PAYMENT = 1 * LINK; // solium-disable-line zeppelin/no-arithmetic-operations
+  
   uint256 public currentPrice;
   uint256 public carbon;
   bytes32 public lastMarket;
@@ -806,13 +807,20 @@ contract ARopstenConsumer is Chainlinked, Ownable {
     chainlinkRequest(req, ORACLE_PAYMENT);
   }
 
-  function requestCarbon(string _jobId)
+  function requestCarbon(string _jobId, string memory _dest, string memory _origin)
     public
     onlyOwner
   {
     Chainlink.Request memory req = newRequest(stringToBytes32(_jobId), this, this.fulfillCarbon.selector);
     // Changed
-    req.add("url", "http://impact.brighterplanet.com/flights.json?destination_airport=CDG&origin_airport=SXF&timeframe=2019-01-01%2F2020-01-01");
+    bytes memory url = abi.encodePacked(
+        "http://impact.brighterplanet.com/flights.json?destination_airport=",
+        _dest,
+        "&origin_airport=",
+        _origin,
+        "&timeframe=2019-01-01%2F2020-01-01"
+    );
+    req.add("url", string(url));
     string[] memory path = new string[](4);
     // Changed
     path[0] = "decisions";
