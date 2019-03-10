@@ -54,8 +54,8 @@ Put the SmartCode into Remix.
 
 ## Authors
 
-* **Rachel Black ** - *Founder* - [RachBLondon](https://github.com/RachBLondon)
-* **Valerie Vaske** - *Founder* - [Lilith1410](https://github.com/Lilith1410)
+* **Rachel Black** - [RachBLondon](https://github.com/RachBLondon)
+* **Valerie Vaske** - [Lilith1410](https://github.com/Lilith1410)
 
 ## Acknowledgments
 
